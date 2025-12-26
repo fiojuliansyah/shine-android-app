@@ -2586,7 +2586,7 @@ button {
 }
 
 .ios-switch-icon label::before {
-  background-color: #FE5B24 !important;
+  background-color: #1733A4 !important;
 }
 .ios-switch-icon i {
   line-height: 32px;
@@ -2692,17 +2692,17 @@ button {
   -webkit-transform: translateX(26px) !important;
 }
 .classic-input:checked ~ .fa-plus {
-  color: #FE5B24 !important;
+  color: #1733A4 !important;
   transform: rotate(45deg);
   transition: all 250ms ease;
 }
 .classic-input:checked ~ .fa-angle-down {
-  color: #FE5B24 !important;
+  color: #1733A4 !important;
   transform: rotate(180deg);
   transition: all 250ms ease;
 }
 .classic-input:checked ~ .fa-circle {
-  color: #FE5B24 !important;
+  color: #1733A4 !important;
   transform: scale(1.3, 1.3);
   transition: all 250ms ease;
 }
@@ -5268,20 +5268,20 @@ input[type=number] {
 
 /* Generating Color Pack*/
 .color-highlight {
-  color: #FE5B24 !important;
+  color: #1733A4 !important;
 }
 
 .bg-highlight {
-  background-color: #FE5B24 !important;
+  background-color: #1733A4 !important;
   color: #FFF !important;
 }
 
 .border-highlight {
-  border-color: #FE5B24 !important;
+  border-color: #1733A4 !important;
 }
 
 .gradient-highlight {
-  background-image: linear-gradient(to bottom, #ED5565, #FE5B24) !important;
+  background-image: linear-gradient(to bottom, #ED5565, #1733A4) !important;
 }
 
 .gradient-menu {
@@ -5428,16 +5428,16 @@ input[type=number] {
 }
 
 .color-highlight-dark {
-  color: #FE5B24 !important;
+  color: #1733A4 !important;
 }
 
 .color-icon-highlight {
-  stroke: #FE5B24 !important;
+  stroke: #1733A4 !important;
   fill: !important;
 }
 
 .bg-highlight-dark {
-  background-color: #FE5B24 !important;
+  background-color: #1733A4 !important;
   color: #FFF !important;
 }
 
@@ -5446,15 +5446,15 @@ input[type=number] {
 }
 
 .border-highlight-dark {
-  border-color: #FE5B24 !important;
+  border-color: #1733A4 !important;
 }
 
 .focus-highlight:focus {
-  border-color: #FE5B24 !important;
+  border-color: #1733A4 !important;
 }
 
 .gradient-highlight {
-  background-image: linear-gradient(to bottom, #ED5565, #FE5B24);
+  background-image: linear-gradient(to bottom, #ED5565, #1733A4);
 }
 
 .color-green-light {
@@ -6416,7 +6416,7 @@ input[type=number] {
 .footer-bar-1 .active-nav i,
 .footer-bar-1 .active-nav span,
 .footer-bar-3 .active-nav i {
-  color: #FE5B24 !important;
+  color: #1733A4 !important;
 }
 
 .form-floating-over > .form-control:focus ~ label {
@@ -6436,7 +6436,7 @@ input[type=number] {
 }
 
 .bg-highlight {
-  background-color: #FE5B24;
+  background-color: #1733A4;
   color: #FFF !important;
 }
 
