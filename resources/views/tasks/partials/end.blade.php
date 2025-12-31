@@ -20,15 +20,27 @@
                     📷 Foto Akhir
                 </button>
 
-                <button type="button" onclick="deletePhoto()" id="btnDelete" class="btn btn-action bg-red-dark"
-                    style="display:none;">
+                <button type="button" onclick="deletePhoto()" id="btnDelete"
+                    class="btn btn-action bg-red-dark" style="display:none;">
                     🗑 Hapus Foto
                 </button>
-
-                <button type="submit" id="btnSubmit" class="btn btn-action bg-green-dark" disabled>
-                    Selesaikan Pekerjaan
-                </button>
             </div>
+        </div>
+
+        <div class="mt-3">
+            <textarea name="description"
+                class="form-control rounded-m"
+                rows="4"
+                placeholder="Keterangan pekerjaan..."
+                required></textarea>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" id="btnSubmit"
+                class="btn btn-full btn-action bg-green-dark"
+                disabled>
+                Selesaikan Pekerjaan
+            </button>
         </div>
     </div>
 </form>

@@ -147,6 +147,7 @@ class ScheduleController extends Controller
         $taskProgress->image_after_path = $imgPath;
         $taskProgress->status = 'completed';
         $taskProgress->is_worked = 'Sudah Dikerjakan';
+        $taskProgress->progress_description = $request->description;
         $taskProgress->save();
 
         return redirect()->back()
