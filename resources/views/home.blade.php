@@ -235,7 +235,7 @@
                                 </div>
                             </a>
         
-                            <a href="#" target="_blank"
+                            {{-- <a href="#" target="_blank"
                                 class="list-group-item px-1 d-flex align-items-center p-3">
                                 <div class="rounded-3 bg-blue-dark-supervisor size-icon-supervisor shadow-sm">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -266,7 +266,7 @@
                                 <div class="ms-auto">
                                     <i class="fa fa-angle-right"></i>
                                 </div>
-                            </a>
+                            </a> --}}
 
                             <a href="{{ route('supervisor.change-shift.index') }}" target="_blank"
                                 class="list-group-item px-1 d-flex align-items-center p-3">

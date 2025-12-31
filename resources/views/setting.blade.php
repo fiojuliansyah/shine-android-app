@@ -39,13 +39,13 @@
                 <strong>BANK Information</strong>
                 <i class="fa fa-angle-right color-dark-dark"></i>
             </a>
-            {{-- <a href="{{ route('esign') }}">
+            <a href="{{ route('esign') }}" target="_blank">
                 <i class="fas fa-signature font-20"></i>
                 <span>Tanda tangan digital</span>
                 <strong>Digital signature</strong>
                 <span class="badge bg-red-dark me-2">NEW</span>
                 <i class="fa fa-angle-right"></i>
-            </a> --}}
+            </a>
             <a href="#">
                 <i class="fas fa-user-shield font-20 color-dark-dark"></i>
                 <span>PIN</span>
