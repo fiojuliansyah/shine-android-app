@@ -48,11 +48,11 @@
         <div id="map" style="height: 100vh;"></div>
         
         @if ($latestClockIn)
-            <a href="{{ route('attendance.clockout') }}" id="clockButton" class="btn btn-m bg-red-dark rounded-s text-uppercase font-900" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: none;">
+            <a href="{{ route('attendance.clockout') }}" target="_blank" id="clockButton" class="btn btn-m bg-red-dark rounded-s text-uppercase font-900" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: none;">
                 <i class="fas fa-camera"></i>&nbsp; CLOCK OUT
             </a>
         @else
-            <a href="{{ route('attendance.clockin') }}" id="clockButton" class="btn btn-m bg-red-dark rounded-s text-uppercase font-900" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: none;">
+            <a href="{{ route('attendance.clockin') }}" target="_blank" id="clockButton" class="btn btn-m bg-red-dark rounded-s text-uppercase font-900" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: none;">
                 <i class="fas fa-camera"></i>&nbsp; CLOCK IN
             </a>
         @endif
