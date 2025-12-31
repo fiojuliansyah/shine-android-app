@@ -32,13 +32,13 @@
                     📷 Ambil Foto
                 </button>
 
-                <button type="button" onclick="deletePhoto()" id="btnDelete"
-                    class="btn btn-action bg-red-dark" style="display:none;">
+                <button type="button" onclick="deletePhoto()" id="btnDelete" class="btn btn-action bg-red-dark"
+                    style="display:none;">
                     🗑 Hapus Foto
                 </button>
 
-                <button type="button" onclick="submitForm()" id="btnSubmit"
-                    class="btn btn-action bg-green-dark" disabled>
+                <button type="button" onclick="submitForm()" id="btnSubmit" class="btn btn-action bg-green-dark"
+                    disabled>
                     ✔ Mulai
                 </button>
             </div>
@@ -47,54 +47,92 @@
 </form>
 
 @push('css')
-<style>
-.camera-wrapper{max-width:420px;margin:auto}
-.camera-frame{border-radius:16px;overflow:hidden;background:#000}
-#video,.camera-preview{width:100%;border-radius:16px}
-.camera-preview{display:none}
-.camera-actions{display:flex;flex-direction:column;gap:10px;margin-top:16px}
-.btn-action{width:100%;padding:14px 0;border-radius:16px;font-weight:700;text-transform:uppercase;font-size:14px}
-</style>
+    <style>
+        .camera-wrapper {
+            max-width: 420px;
+            margin: auto
+        }
+
+        .camera-frame {
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000
+        }
+
+        #video,
+        .camera-preview {
+            width: 100%;
+            border-radius: 16px
+        }
+
+        .camera-preview {
+            display: none
+        }
+
+        .camera-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 14px 0;
+            border-radius: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px
+        }
+    </style>
 @endpush
 
 @push('js')
-<script>
-const video=document.getElementById('video')
-const canvas=document.getElementById('canvas')
-const preview=document.getElementById('preview')
-const imageBase64=document.getElementById('imageBase64')
-const btnDelete=document.getElementById('btnDelete')
-const btnSubmit=document.getElementById('btnSubmit')
+    <script>
+        const video = document.getElementById('video')
+        const canvas = document.getElementById('canvas')
+        const preview = document.getElementById('preview')
+        const imageBase64 = document.getElementById('imageBase64')
+        const btnDelete = document.getElementById('btnDelete')
+        const btnSubmit = document.getElementById('btnSubmit')
 
-navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"},audio:false})
-.then(stream=>video.srcObject=stream)
-.catch(()=>alert('Kamera tidak bisa diakses'))
+        navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: "environment"
+                },
+                audio: false
+            })
+            .then(stream => video.srcObject = stream)
+            .catch(() => alert('Kamera tidak bisa diakses'))
 
-function takePhoto(){
-    canvas.width=video.videoWidth
-    canvas.height=video.videoHeight
-    canvas.getContext('2d').drawImage(video,0,0)
-    const dataURL=canvas.toDataURL('image/jpeg',0.85)
-    preview.src=dataURL
-    preview.style.display='block'
-    video.style.display='none'
-    imageBase64.value=dataURL
-    btnDelete.style.display='block'
-    btnSubmit.disabled=false
-}
+        function takePhoto() {
+            canvas.width = video.videoWidth
+            canvas.height = video.videoHeight
+            canvas.getContext('2d').drawImage(video, 0, 0)
+            const dataURL = canvas.toDataURL('image/jpeg', 0.85)
+            preview.src = dataURL
+            preview.style.display = 'block'
+            video.style.display = 'none'
+            imageBase64.value = dataURL
+            btnDelete.style.display = 'block'
+            btnSubmit.disabled = false
+        }
 
-function deletePhoto(){
-    preview.src=''
-    preview.style.display='none'
-    video.style.display='block'
-    imageBase64.value=''
-    btnDelete.style.display='none'
-    btnSubmit.disabled=true
-}
+        function deletePhoto() {
+            preview.src = ''
+            preview.style.display = 'none'
+            video.style.display = 'block'
+            imageBase64.value = ''
+            btnDelete.style.display = 'none'
+            btnSubmit.disabled = true
+        }
 
-function submitForm(){
-    if(!imageBase64.value){alert('Ambil foto terlebih dahulu');return}
-    document.getElementById('formStore').submit()
-}
-</script>
+        function submitForm() {
+            if (!imageBase64.value) {
+                alert('Ambil foto terlebih dahulu');
+                return
+            }
+            document.getElementById('formStore').submit()
+        }
+    </script>
 @endpush
