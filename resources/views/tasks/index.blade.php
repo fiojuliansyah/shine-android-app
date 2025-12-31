@@ -34,7 +34,7 @@
             <h4>Berlangsung</h4>
             <div class="list-group list-custom-large me-2">
                 @foreach ($taskProgressInProgress as $taskProgress)  
-                    <a href="#">
+                    <a href="{{ route('schedule.show', $taskProgress->task_planner_id) }}">
                         <span>{{ $taskProgress->taskPlanner->name }}</span>
                         <strong>{{ $taskProgress->taskPlanner->work_type }} - Mulai {{ \Carbon\Carbon::parse($taskProgress->start_time)->format('H:i') }}</strong>
                         <i class="fa fa-angle-right"></i>
@@ -50,7 +50,7 @@
             <h4>Selesai</h4>
             <div class="list-group list-custom-large me-2">
                 @foreach ($taskProgressCompleted as $taskProgress)  
-                    <a href="#">
+                    <a href="{{ route('schedule.show', $taskProgress->task_planner_id) }}">
                         <span>{{ $taskProgress->taskPlanner->name }}</span>
                         <strong>{{ $taskProgress->taskPlanner->work_type }} - Mulai {{ \Carbon\Carbon::parse($taskProgress->start_time)->format('H:i') }}</strong>
                         <i class="fa fa-angle-right"></i>
