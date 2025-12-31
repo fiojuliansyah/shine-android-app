@@ -285,7 +285,7 @@
                                 </div>
                             </a>
         
-                            <a href="{{ route('supervisor.site-patroll.index') }}" target="_blank"
+                            {{-- <a href="{{ route('supervisor.site-patroll.index') }}" target="_blank"
                                 class="list-group-item px-1 d-flex align-items-center p-3">
                                 <div class="rounded-3 bg-blue-dark-supervisor size-icon-supervisor shadow-sm">
                                     <i class="fa fa-line-chart" aria-hidden="true"></i>
@@ -294,6 +294,22 @@
                                 <div class="ms-3">
                                     <h4 class="mb-0">Report Patroli</h4>
                                     <p class="lh-1 text-secondary" style="font-size:11px;">Laporan performa & patroli</p>
+                                </div>
+        
+                                <div class="ms-auto">
+                                    <i class="fa fa-angle-right"></i>
+                                </div>
+                            </a> --}}
+
+                            <a href="{{ route('supervisor.site-patroll.index') }}" target="_blank"
+                                class="list-group-item px-1 d-flex align-items-center p-3">
+                                <div class="rounded-3 bg-blue-dark-supervisor size-icon-supervisor shadow-sm">
+                                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                                </div>
+        
+                                <div class="ms-3">
+                                    <h4 class="mb-0">Report Pekerjaan</h4>
+                                    <p class="lh-1 text-secondary" style="font-size:11px;">Laporan performa & pekerjaan</p>
                                 </div>
         
                                 <div class="ms-auto">

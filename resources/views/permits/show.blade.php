@@ -3,7 +3,7 @@
 @section('title', 'Form Pengajuan Ijin')
 @section('content')
 
-<div class="page-content pt-5">
+<div class="page-content">
     @if(isset($permit) && $permit)
         <div class="list-group list-custom-large">
             <div class="mb-3">

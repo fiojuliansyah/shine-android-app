@@ -3,7 +3,7 @@
 @section('title', 'Privacy Policy')
 
 @section('content')
-<div class="page-content pt-5">
+<div class="page-content">
 
     <div class="content">
         <div class="d-flex flex-column gap-4">

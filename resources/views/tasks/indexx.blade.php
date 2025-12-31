@@ -6,7 +6,7 @@
     <a href="{{ route('home') }}" class="header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
 </div>
 <br>
-<div class="page-content pt-5">
+<div class="page-content">
     <div class="calendar bg-theme shadow-xl rounded-m">
         <div class="cal-header">
             <h4 class="cal-title text-center text-uppercase font-800 bg-highlight color-white">{{ now()->format('F Y') }}</h4>

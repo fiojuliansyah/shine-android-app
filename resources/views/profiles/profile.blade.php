@@ -2,7 +2,7 @@
 
 @section('title','Profil')
 @section('content')
-    <div class="page-content pt-5">
+    <div class="page-content">
         <div class="content mb-0">
             <form id="profile-update" class="form" action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">
                 @csrf

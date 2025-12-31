@@ -3,7 +3,7 @@
 @section('title','Form Temuan')
 @section('content')
 
-<div class="page-content pt-5">
+<div class="page-content">
     @if(isset($findingsReport) && $findingsReport)
         <div class="list-group list-custom-large">
             <div class="card card-style mb-3">

@@ -2,7 +2,7 @@
 
 @section('title','Form Pengajuan Cuti')
 @section('content')
-<div class="page-content pt-5">
+<div class="page-content">
     @if(isset($leave) && $leave)
         <div class="list-group list-custom-large">
             <div class="card card-style mb-3">

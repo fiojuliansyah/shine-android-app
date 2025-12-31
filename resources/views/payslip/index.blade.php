@@ -2,7 +2,7 @@
 
 @section('title', 'Payslip')
 @section('content')
-<div class="page-content pt-5">
+<div class="page-content">
     @if(isset($payroll) && $payroll)
         <div class="list-group list-custom-large">
             <div class="mb-3">

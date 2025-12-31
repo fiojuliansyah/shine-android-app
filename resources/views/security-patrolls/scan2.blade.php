@@ -9,7 +9,7 @@
     </a>
 </div>
 
-<div class="page-content pt-5">
+<div class="page-content">
 
     {{-- Notif --}}
     @if(session('success'))

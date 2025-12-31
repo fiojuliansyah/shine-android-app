@@ -2,7 +2,7 @@
 
 @section('title','Pengaturan Akun')
 @section('content')
-<div class="page-content pt-5">
+<div class="page-content">
     <div class="content mb-0">
         <form id="account-update" class="form" action="{{ route('update.account') }}" method="POST">
             @csrf

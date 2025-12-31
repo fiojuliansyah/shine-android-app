@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="page-content pt-5">
+<div class="page-content">
     <div class="d-flex justify-content-end px-3 mb-2">
         <button class="btn btn-light shadow-sm rounded-circle"
                 data-bs-toggle="modal"

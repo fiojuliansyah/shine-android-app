@@ -2,7 +2,7 @@
 
 @section('title', 'Pegawai')
 @section('content')
-    <div class="page-content pt-5 px-3">
+    <div class="page-content px-3">
         <form method="GET" class="mb-4">
             <div class="row">
                 <div class="col-12 mb-2">

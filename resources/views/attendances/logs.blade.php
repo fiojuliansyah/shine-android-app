@@ -3,7 +3,7 @@
 @section('title','Riwayat Absensi')
 
 @section('content')
-<div class="page-content pt-5">
+<div class="page-content">
     <!-- Date Filter Info -->
     @if(request('start_date') || request('end_date'))
     <div class="content mb-0 mt-2">

@@ -6,7 +6,7 @@
     <span class="header-title">Security Patroll</span>
 </div>
 
-<div class="page-content pt-5">
+<div class="page-content">
 
     {{-- FILTER SESSION --}}
     <div class="mb-4">

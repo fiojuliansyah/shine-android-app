@@ -2,7 +2,7 @@
 
 @section('title','Akun Bank')
 @section('content')
-<div class="page-content pt-5">
+<div class="page-content">
         
     <div class="content mb-0">
         <form id="bank-update" class="form" action="{{ route('update.bank') }}" method="POST">

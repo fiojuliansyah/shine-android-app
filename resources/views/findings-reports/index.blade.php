@@ -3,7 +3,7 @@
 @section('title','Temuan (SOS)')
 
 @section('content')
-<div class="page-content pt-5">
+<div class="page-content">
     <div class="content mt-0 mb-0">
         <div class="list-group list-custom-large">
             @foreach ($reports as $report)
