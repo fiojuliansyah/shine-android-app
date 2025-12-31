@@ -85,13 +85,10 @@
             </div>
         </div>
     @else
-        <div class="card card-style">
-            <div class="content mb-0">
-                <div class="empty-state">
-                    <img src="{{ asset('images/empty-logs.svg') }}" alt="No Logs" class="empty-image">
-                    <h3>Tidak Ada Riwayat</h3>
-                    <p>Belum ada riwayat absensi yang tercatat</p>
-                </div>
+        <div class="content mb-0">
+            <div class="empty-state">
+                <h3>Tidak Ada Riwayat</h3>
+                <p>Belum ada riwayat absensi yang tercatat</p>
             </div>
         </div>
     @endif
