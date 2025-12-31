@@ -57,7 +57,7 @@
 </div>
 @endsection
 
-@section('js')
+@push('js')
 <script>
 let video = document.getElementById('video');
 let canvas = document.getElementById('canvas');
@@ -97,4 +97,4 @@ function submitForm() {
     document.getElementById('formStore').submit();
 }
 </script>
-@endsection
+@endpush
