@@ -301,7 +301,7 @@
                                 </div>
                             </a> --}}
 
-                            <a href="{{ route('supervisor.site-patroll.index') }}" target="_blank"
+                            <a href="#" target="_blank"
                                 class="list-group-item px-1 d-flex align-items-center p-3">
                                 <div class="rounded-3 bg-blue-dark-supervisor size-icon-supervisor shadow-sm">
                                     <i class="fa fa-line-chart" aria-hidden="true"></i>
