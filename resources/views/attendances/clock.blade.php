@@ -1,30 +1,21 @@
 @extends('layouts.app')
 
+@section('title', 'Attend')
+
 @section('content')
     <div class="content mb-0 p-0">
-        <!-- Back button -->
-        <a href="{{ route('home') }}" class="header-back">
-            <i class="fas fa-arrow-left"></i>
-        </a>
-        
-        <!-- Camera container - now fullscreen -->
         <div id="camera-container" class="camera-fullscreen">
-            <!-- Video and canvas for face detection -->
             <video id="video-element" autoplay muted playsinline></video>
             <canvas id="face-overlay"></canvas>
 
-            <!-- Overlay container for all information -->
             <div class="camera-overlay">
-                <!-- Header with clock in/out title -->
                 <div class="overlay-header">
                     <h2 class="text-white">
                         {{ request()->route()->getName() == 'attendance.clockin' ? 'Clock In' : 'Clock Out' }}
                     </h2>
                 </div>
 
-                <!-- Status container -->
                 <div class="overlay-status">
-                    <!-- Face animation guide -->
                     <div id="face-animation-guide" class="face-animation-container">
                         <div class="face-outline">
                             <div class="face-shape"></div>
