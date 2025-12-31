@@ -179,37 +179,21 @@ class ProfileController extends Controller
         $user = Auth::user();
         $profile = $user->profile()->first();
 
-        if ($request->esign) {
-            $imageData = $request->input('esign');
-            list($type, $imageData) = explode(';', $imageData);
-            list(, $imageData) = explode(',', $imageData);
-            $imageData = base64_decode($imageData);
-            $tempFile = tempnam(sys_get_temp_dir(), 'esign_') . '.png';
-            file_put_contents($tempFile, $imageData);
+        if ($request->filled('esign')) {
 
-            $storageOption = $request->input('storage_option', 'local');
-
-            if ($storageOption === 's3') {
-                $path = Storage::disk('s3')->putFile('esign_images', $tempFile);
-                $esignUrl = Storage::disk('s3')->url($path);
-            } else {
-                $path = Storage::disk('public')->putFile('esign_images', $tempFile);
-                $esignUrl = asset("storage/{$path}");
-            }
-
-            unlink($tempFile);
+            $svgCode = $request->esign;
 
             if ($profile) {
-                $profile->esign_url = $esignUrl;
+                $profile->esign = $svgCode;
                 $profile->save();
             } else {
                 $user->profile()->create([
-                    'esign_url' => $esignUrl
+                    'esign' => $svgCode
                 ]);
             }
         }
 
         return redirect()->back()
-            ->with('success', 'Tanda Tangan ' . $user->name . ' berhasil diperbarui');
+            ->with('success', 'Tanda tangan berhasil disimpan');
     }
 }

@@ -31,9 +31,9 @@
 
     <div class="content mt-5">
         <h5 class="font-16 font-500">Tanda tangan digital anda</h5>
-        <img src="{{ $user->profile['esign_url'] ?? '' }}"
-             class="img-fluid rounded"
-             style="max-width:300px">
+        <div style="width:300px">
+            {!! $user->profile->esign_svg !!}
+        </div>
     </div>
 </div>
 @endsection
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return
         }
 
-        document.getElementById('esignData').value = signaturePad.toDataURL('image/png')
+        document.getElementById('esignData').value = signaturePad.toSVG()
         document.getElementById('esign-update').submit()
     }
 
