@@ -1,100 +1,146 @@
 @extends('layouts.app')
 
-@section('title','Tugas Hari Ini')
+@section('title', 'Tugas Hari Ini')
 
 @section('content')
-<div class="content pt-5">
-    <form id="formStore" method="POST" action="{{ route('progress.start') }}">
-        @csrf
+    <div class="content pt-5">
+        <form id="formStore" method="POST" action="{{ route('progress.start') }}">
+            @csrf
 
-        <input type="hidden" name="task_planner_id" value="{{ $task->id }}">
-        <input type="hidden" name="image_base64" id="imageBase64">
+            <input type="hidden" name="task_planner_id" value="{{ $task->id }}">
+            <input type="hidden" name="image_base64" id="imageBase64">
 
-        <div class="content mb-0 mt-3">
-            <span class="color-highlight font-300 d-block text-uppercase font-10 pt-3">
-                {{ $task->date }}
-            </span>
-            <strong class="color-theme font-20 d-block mt-n2 mb-n2">
-                {{ $task->name }}
-            </strong>
-            <span class="font-11 color-theme opacity-30 d-block pb-2 pt-2">
-                <i class="fa fa-map-marker pe-2"></i>{{ $task->floor->name }}
-            </span>
+            <div class="content mb-0 mt-3">
+                <span class="color-highlight font-300 d-block text-uppercase font-10 pt-3">
+                    {{ $task->date }}
+                </span>
 
-            <div class="divider mt-3 mb-3"></div>
+                <strong class="color-theme font-20 d-block mt-n2 mb-n2">
+                    {{ $task->name }}
+                </strong>
 
-            {{-- CAMERA --}}
-            <div class="text-center">
-                <video id="video" autoplay playsinline style="width:100%; border-radius:12px;"></video>
-                <canvas id="canvas" style="display:none;"></canvas>
+                <span class="font-11 color-theme opacity-30 d-block pb-2 pt-2">
+                    <i class="fa fa-map-marker pe-2"></i>{{ $task->floor->name }}
+                </span>
 
-                <img id="preview" style="display:none; width:100%; border-radius:12px; margin-top:10px;">
-            </div>
+                <div class="divider mt-3 mb-3"></div>
 
-            <div class="row mt-3">
-                <div class="col-6">
-                    <button type="button" onclick="takePhoto()"
-                        class="btn btn-full btn-icon rounded-sm btn-m bg-blue-dark text-uppercase font-700">
-                        📷 Ambil Foto
-                    </button>
+                <div class="camera-wrapper text-center">
+                    <div class="camera-frame">
+                        <video id="video" autoplay playsinline></video>
+                        <img id="preview" class="camera-preview">
+                    </div>
+
+                    <canvas id="canvas" style="display:none;"></canvas>
+
+                    <div class="camera-actions mt-3">
+                        <button type="button" id="btnTake" onclick="takePhoto()"
+                            class="btn btn-full btn-m bg-blue-dark font-700 text-uppercase">
+                            📷 Ambil Foto
+                        </button>
+
+                        <button type="button" id="btnDelete" onclick="deletePhoto()"
+                            class="btn btn-full btn-m bg-red-dark font-700 text-uppercase mt-2" style="display:none;">
+                            🗑 Hapus Foto
+                        </button>
+
+                        <button type="button" id="btnSubmit" onclick="submitForm()"
+                            class="btn btn-full btn-m bg-green-dark font-700 text-uppercase mt-2" disabled>
+                            ✔ Mulai
+                        </button>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <button type="button" onclick="submitForm()"
-                        class="btn btn-full btn-icon rounded-sm btn-m bg-green-dark text-uppercase font-700">
-                        ✔ Mulai
-                    </button>
-                </div>
             </div>
-
-            <div class="mt-2">
-                <a href="{{ route('schedule') }}"
-                    class="btn btn-full btn-icon rounded-sm btn-m bg-red-dark text-uppercase font-700">
-                    ✖ Batal
-                </a>
-            </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 @endsection
+@push('css')
+    <style>
+        .camera-wrapper {
+            max-width: 420px;
+            margin: auto;
+        }
 
+        .camera-frame {
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #video,
+        .camera-preview {
+            width: 100%;
+            border-radius: 16px;
+        }
+
+        .camera-preview {
+            display: none;
+        }
+
+        .camera-actions .btn {
+            border-radius: 14px;
+        }
+    </style>
+@endpush
 @push('js')
-<script>
-let video = document.getElementById('video');
-let canvas = document.getElementById('canvas');
-let preview = document.getElementById('preview');
-let imageBase64 = document.getElementById('imageBase64');
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const preview = document.getElementById('preview');
+        const imageBase64 = document.getElementById('imageBase64');
 
-navigator.mediaDevices.getUserMedia({
-    video: { facingMode: "environment" },
-    audio: false
-})
-.then(stream => {
-    video.srcObject = stream;
-})
-.catch(err => {
-    alert('Kamera tidak bisa diakses');
-});
+        const btnDelete = document.getElementById('btnDelete');
+        const btnSubmit = document.getElementById('btnSubmit');
 
-function takePhoto() {
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+        navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: "environment"
+                },
+                audio: false
+            })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(() => {
+                alert('Kamera tidak bisa diakses');
+            });
 
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0);
+        function takePhoto() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
 
-    const dataURL = canvas.toDataURL('image/jpeg', 0.8);
-    preview.src = dataURL;
-    preview.style.display = 'block';
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0);
 
-    imageBase64.value = dataURL;
-}
+            const dataURL = canvas.toDataURL('image/jpeg', 0.85);
 
-function submitForm() {
-    if (!imageBase64.value) {
-        alert('Ambil foto terlebih dahulu');
-        return;
-    }
-    document.getElementById('formStore').submit();
-}
-</script>
+            preview.src = dataURL;
+            preview.style.display = 'block';
+            video.style.display = 'none';
+
+            imageBase64.value = dataURL;
+
+            btnDelete.style.display = 'block';
+            btnSubmit.disabled = false;
+        }
+
+        function deletePhoto() {
+            preview.src = '';
+            preview.style.display = 'none';
+            video.style.display = 'block';
+
+            imageBase64.value = '';
+
+            btnDelete.style.display = 'none';
+            btnSubmit.disabled = true;
+        }
+
+        function submitForm() {
+            if (!imageBase64.value) {
+                alert('Ambil foto terlebih dahulu');
+                return;
+            }
+            document.getElementById('formStore').submit();
+        }
+    </script>
 @endpush
