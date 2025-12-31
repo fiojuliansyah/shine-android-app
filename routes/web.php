@@ -18,6 +18,7 @@ use App\Http\Controllers\FaceRecognitionController;
 use App\Http\Controllers\Supervisor\TeamController;
 use App\Http\Controllers\Supervisor\ChangeShiftController;
 use App\Http\Controllers\Supervisor\SitePatrollController;
+use App\Http\Controllers\Supervisor\TaskScheduleController;
 
 Route::get('/download', [HomeController::class, 'download'])->name('download');
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
@@ -120,5 +121,7 @@ Route::middleware('auth')->prefix('mobile')->group(function () {
 
         Route::get('/site-patroll', [SitePatrollController::class, 'index'])->name('site-patroll.index');
         Route::get('/site-patroll/{siteId}', [SitePatrollController::class, 'show'])->name('site-patroll.show');
+
+        Route::get('/task-schedule', [TaskScheduleController::class, 'index'])->name('task-schedule.index');
     });
 });
