@@ -24,7 +24,7 @@
                     </div>
 
                     <div id="camera-container" class="text-center mb-3" style="display: none;">
-                        <video id="video-feed" autoplay muted playsinline class="img-fluid rounded" style="max-height: 400px; width: 100%; object-fit: cover; background: #000;"></video>
+                        <video id="video-feed" autoplay muted playsinline class="img-fluid rounded" style="max-height: 400px; width: 100%; object-fit: cover; background: #000; transform: scaleX(-1);"></video>
                     </div>
 
                     <div id="face-processing" class="text-center py-3" style="display: none;">
