@@ -51,14 +51,13 @@ class ScheduleController extends Controller
     {
         $task = TaskPlanner::findOrFail($id);
 
-        $lastProgress = TaskProgress::where('task_planner_id', $task->id)
+        $taskProgress = TaskProgress::where('task_planner_id', $task->id)
             ->where('user_id', Auth::id())
             ->latest()
             ->first();
 
-        return view('tasks.show', compact('task', 'lastProgress'));
+        return view('tasks.show', compact('task', 'taskProgress'));
     }
-
 
     public function progressStart(Request $request)
     {
