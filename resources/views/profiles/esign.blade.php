@@ -5,41 +5,95 @@
 <div class="page-content">
     <div class="content mb-0">
         <h5 class="font-16 font-500">Silahkan masukan tanda tangan dibawah ini.</h5>
-        <form id="esign-update" class="form" action="{{ route('update.esign') }}" method="POST">
+
+        <form id="esign-update" action="{{ route('update.esign') }}" method="POST">
             @csrf
-            <div style="border: 1px solid #eef2f1; border-radius: 8px; padding: 10px; box-sizing: border-box;">
-                <canvas id="signatureCanvas" width="360" style="border: 1px solid #000;"></canvas>
+
+            <div class="signature-wrapper">
+                <canvas id="signatureCanvas"></canvas>
             </div>
-            <input type="hidden" name="esign" id="esignData" value="">
+
+            <input type="hidden" name="esign" id="esignData">
         </form>
+
+        <div class="signature-actions mt-3">
+            <a href="#" onclick="saveSignature()"
+                class="btn btn-full bg-highlight rounded-sm shadow-xl btn-m text-uppercase font-900">
+                Save Signature
+            </a>
+
+            <a href="#" onclick="clearSignature()"
+                class="btn btn-full bg-red-dark rounded-sm btn-m mt-2">
+                Clear
+            </a>
+        </div>
     </div>
-    <a href="#" onclick="event.preventDefault(); saveSignature();" class="btn btn-full btn-margins bg-highlight rounded-sm shadow-xl btn-m text-uppercase font-900">Save Signature</a>
+
     <div class="content mt-5">
-        <h5 class="font-16 font-500">tanda tangan digital anda.</h5>
-        <img src="{{ $user->profile['esign_url'] ?? '' }}" width="300" alt="Existing Signature">
+        <h5 class="font-16 font-500">Tanda tangan digital anda</h5>
+        <img src="{{ $user->profile['esign_url'] ?? '' }}"
+             class="img-fluid rounded"
+             style="max-width:300px">
     </div>
 </div>
 @endsection
 
+@push('css')
+<style>
+    .signature-wrapper {
+        width: 100%;
+        height: 200px;
+        border: 1px solid #eef2f1;
+        border-radius: 8px;
+        background: #fff;
+    }
+
+    #signatureCanvas {
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+    }
+</style>
+@endpush
+
+
 @push('js')
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@3.0.0/signature_pad.js" data-navigate-track></script>
-<script data-navigate-track>
-    document.addEventListener('DOMContentLoaded', function() {
-        var canvas = document.getElementById('signatureCanvas');
-        var signaturePad = new SignaturePad(canvas);
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
 
-        window.saveSignature = function() {
-            if (signaturePad.isEmpty()) {
-                alert("Please provide a signature.");
-                return;
-            }
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('signatureCanvas')
 
-            var dataURL = signaturePad.toDataURL(); // Convert canvas to data URL
-            document.getElementById('esignData').value = dataURL; // Set data URL to hidden input
+    function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1)
+        canvas.width = canvas.offsetWidth * ratio
+        canvas.height = canvas.offsetHeight * ratio
+        canvas.getContext('2d').scale(ratio, ratio)
+    }
 
-            // Submit the form
-            document.getElementById('esign-update').submit();
-        };
-    });
+    resizeCanvas()
+    window.addEventListener('resize', resizeCanvas)
+
+    const signaturePad = new SignaturePad(canvas, {
+        minWidth: 1,
+        maxWidth: 2.5,
+        penColor: 'black'
+    })
+
+    window.saveSignature = function () {
+        if (signaturePad.isEmpty()) {
+            alert('Silahkan isi tanda tangan terlebih dahulu')
+            return
+        }
+
+        document.getElementById('esignData').value = signaturePad.toDataURL('image/png')
+        document.getElementById('esign-update').submit()
+    }
+
+    window.clearSignature = function () {
+        signaturePad.clear()
+    }
+})
 </script>
 @endpush
+
