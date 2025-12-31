@@ -7,6 +7,7 @@ use App\Models\TaskPlanner;
 use App\Models\TaskProgress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ScheduleController extends Controller
