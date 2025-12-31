@@ -32,7 +32,7 @@
     <div class="content mt-5">
         <h5 class="font-16 font-500">Tanda tangan digital anda</h5>
         <div style="width:300px">
-            {!! $user->profile->esign_svg !!}
+            {!! $user->profile->esign !!}
         </div>
     </div>
 </div>
