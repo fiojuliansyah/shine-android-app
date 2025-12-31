@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Attend')
+@section('title', request()->route()->getName() === 'attendance.clockin' ? 'Clock In' : 'Clock Out')
+
 
 @section('content')
     <div class="content mb-0 p-0">
@@ -9,12 +10,6 @@
             <canvas id="face-overlay"></canvas>
 
             <div class="camera-overlay">
-                <div class="overlay-header">
-                    <h2 class="text-white">
-                        {{ request()->route()->getName() == 'attendance.clockin' ? 'Clock In' : 'Clock Out' }}
-                    </h2>
-                </div>
-
                 <div class="overlay-status">
                     <div id="face-animation-guide" class="face-animation-container">
                         <div class="face-outline">
