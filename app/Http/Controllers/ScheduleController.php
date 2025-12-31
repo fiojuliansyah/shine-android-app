@@ -65,26 +65,32 @@ class ScheduleController extends Controller
         $user = Auth::user();
         $timeNow = Carbon::now()->toTimeString();
         $currentDate = Carbon::now()->toDateString();
-    
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            
-            $cloudinaryImage = Cloudinary::upload($image->getRealPath(), [
-                'folder' => 'progress',
-                'transformation' => [
-                    'width' => 300, 
-                    'height' => 200,
-                    'crop' => 'fill'
-                ]
-            ]);
-            $imgUrl = $cloudinaryImage->getSecurePath();
-            $imgPublicId = $cloudinaryImage->getPublicId();
-        } else {
-            $imgUrl = null;
-            $imgPublicId = null;
+
+        $imgUrl = null;
+        $imgPath = null;
+
+        if ($request->filled('image_base64')) {
+
+            $base64 = $request->image_base64;
+            $base64 = preg_replace('#^data:image/\w+;base64,#i', '', $base64);
+
+            $imageData = base64_decode($base64);
+            $fileName = 'progress_' . time() . '.jpg';
+
+            $storageOption = $request->input('storage_option', 'local');
+
+            if ($storageOption === 's3') {
+                Storage::disk('s3')->put("progress/{$fileName}", $imageData);
+                $imgPath = "progress/{$fileName}";
+                $imgUrl = Storage::disk('s3')->url($imgPath);
+            } else {
+                Storage::disk('public')->put("progress/{$fileName}", $imageData);
+                $imgPath = "progress/{$fileName}";
+                $imgUrl = asset("storage/{$imgPath}");
+            }
         }
-    
-        $taskProgress = new TaskProgress;
+
+        $taskProgress = new TaskProgress();
         $taskProgress->task_planner_id = $request->task_planner_id;
         $taskProgress->user_id = $user->id;
         $taskProgress->site_id = $user->site->id;
@@ -92,12 +98,13 @@ class ScheduleController extends Controller
         $taskProgress->date = $currentDate;
         $taskProgress->start_time = $timeNow;
         $taskProgress->image_before_url = $imgUrl;
-        $taskProgress->image_before_public_id = $imgPublicId;
+        $taskProgress->image_before_path = $imgPath;
         $taskProgress->save();
-    
+
         return redirect()->back()
-                         ->with('success', 'Task recorded successfully.');
+            ->with('success', 'Task recorded successfully.');
     }
+
 
     public function progressEnd(Request $request)
     {
