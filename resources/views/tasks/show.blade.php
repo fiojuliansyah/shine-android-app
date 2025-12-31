@@ -3,7 +3,7 @@
 @section('title', 'Tugas Hari Ini')
 
 @section('content')
-    <div class="content pt-5">
+    <div class="content">
         <form id="formStore" method="POST" action="{{ route('progress.start') }}">
             @csrf
 
@@ -33,22 +33,22 @@
 
                     <canvas id="canvas" style="display:none;"></canvas>
 
-                    <div class="camera-actions mt-3">
-                        <button type="button" id="btnTake" onclick="takePhoto()"
-                            class="btn btn-full btn-m bg-blue-dark font-700 text-uppercase">
+                    <div class="camera-actions">
+                        <button type="button" id="btnTake" onclick="takePhoto()" class="btn btn-action bg-blue-dark">
                             📷 Ambil Foto
                         </button>
 
-                        <button type="button" id="btnDelete" onclick="deletePhoto()"
-                            class="btn btn-full btn-m bg-red-dark font-700 text-uppercase mt-2" style="display:none;">
+                        <button type="button" id="btnDelete" onclick="deletePhoto()" class="btn btn-action bg-red-dark"
+                            style="display:none;">
                             🗑 Hapus Foto
                         </button>
 
-                        <button type="button" id="btnSubmit" onclick="submitForm()"
-                            class="btn btn-full btn-m bg-green-dark font-700 text-uppercase mt-2" disabled>
+                        <button type="button" id="btnSubmit" onclick="submitForm()" class="btn btn-action bg-green-dark"
+                            disabled>
                             ✔ Mulai
                         </button>
                     </div>
+
                 </div>
             </div>
         </form>
@@ -77,8 +77,20 @@
             display: none;
         }
 
-        .camera-actions .btn {
-            border-radius: 14px;
+        .camera-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 14px 0;
+            border-radius: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
         }
     </style>
 @endpush
