@@ -26,7 +26,7 @@
                 </button>
 
                 <button type="submit" id="btnSubmit" class="btn btn-action bg-green-dark" disabled>
-                    ✔ Selesai
+                    Selesaikan Pekerjaan
                 </button>
             </div>
         </div>
