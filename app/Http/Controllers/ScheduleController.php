@@ -94,7 +94,7 @@ class ScheduleController extends Controller
         $taskProgress->user_id = $user->id;
         $taskProgress->site_id = $user->site->id;
         $taskProgress->status = 'in_progress';
-        $taskProgress->is_worked = 'proses pengerjaan';
+        $taskProgress->is_worked = 'not_worked';
         $taskProgress->date = $currentDate;
         $taskProgress->start_time = $timeNow;
         $taskProgress->image_before_url = $imgUrl;
@@ -146,7 +146,7 @@ class ScheduleController extends Controller
         $taskProgress->image_after_url = $imgUrl;
         $taskProgress->image_after_path = $imgPath;
         $taskProgress->status = 'completed';
-        $taskProgress->is_worked = 'Sudah Dikerjakan';
+        $taskProgress->is_worked = 'worked';
         $taskProgress->progress_description = $request->description;
         $taskProgress->save();
 
