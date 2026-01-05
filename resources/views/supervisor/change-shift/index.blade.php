@@ -39,7 +39,7 @@
                         <small>Pulang: {{ substr($shift->clock_out, 0, 5) }}</small><br>
                     </div>
 
-                    <a href="{{ route('supervisor.change-shift.show', $shift->id) }}" class="btn btn-primary btn-sm">
+                    <a href="{{ route('supervisor.change-shift.show', $shift->id) }}" target="_blank" class="btn btn-primary btn-sm">
                         Pilih
                     </a>
                 </div>
