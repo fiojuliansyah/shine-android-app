@@ -23,7 +23,6 @@
             const faceAnimationGuide = document.getElementById('face-animation-guide');
             const animationText = document.getElementById('animation-text');
 
-            // Hide submit button (already hidden in HTML, but this is a safety measure)
             submitBtn.style.display = 'none';
 
             // Variables

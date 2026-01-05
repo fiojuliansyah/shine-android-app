@@ -1,6 +1,6 @@
 // To clear cache on devices, always increase APP_VER number after making changes.
 // The app will serve fresh content right away or after 2-3 refreshes (open / close)
-var APP_NAME = 'Useit App';
+var APP_NAME = 'Shine App';
 var APP_VER = '4.8.1';
 var CACHE_NAME = APP_NAME + '-' + APP_VER;
 
@@ -38,22 +38,17 @@ var REQUIRED_FILES = [
 	'/mobile/images/empty.png',
 ];
 
-// Service Worker Diagnostic. Set true to get console logs.
 var APP_DIAG = false;
 
-//Service Worker Function Below.
 self.addEventListener('install', function(event) {
 	event.waitUntil(
 		caches.open(CACHE_NAME)
 		.then(function(cache) {
-			//Adding files to cache
 			return cache.addAll(REQUIRED_FILES);
 		}).catch(function(error) {
-			//Output error if file locations are incorrect
 			if(APP_DIAG){console.log('Service Worker Cache: Error Check REQUIRED_FILES array in _service-worker.js - files are missing or path to files is incorrectly written -  ' + error);}
 		})
 		.then(function() {
-			//Install SW if everything is ok
 			return self.skipWaiting();
 		})
 		.then(function(){
@@ -65,7 +60,6 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('fetch', function(event) {
 	event.respondWith(
-		//Fetch Data from cache if offline
 		caches.match(event.request)
 			.then(function(response) {
 				if (response) {return response;}
@@ -79,7 +73,6 @@ self.addEventListener('fetch', function(event) {
 self.addEventListener('activate', function(event) {
 	event.waitUntil(self.clients.claim());
 	event.waitUntil(
-		//Check cache number, clear all assets and re-add if cache number changed
 		caches.keys().then(cacheNames => {
 			return Promise.all(
 				cacheNames

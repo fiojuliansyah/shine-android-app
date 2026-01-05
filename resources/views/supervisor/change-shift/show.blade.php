@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Shift ' . $shift->name)
+
 @section('content')
 
     <div class="header header-fixed header-logo-center">

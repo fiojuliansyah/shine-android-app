@@ -27,7 +27,6 @@
                         </div>
                     </div>
                     
-                    <!-- Face detection status -->
                     <div class="face-detection-status">
                         <div id="loading-models">
                             <div class="spinner-border text-white" role="status">
@@ -43,20 +42,14 @@
                         </div>
                     </div>
 
-                    <!-- Verification result -->
                     <div id="verification-result" style="display: none;">
                         <div id="verification-success" class="bg-success p-2 rounded text-white text-center" style="display: none;">
                             <i class="fas fa-check-circle"></i> Verifikasi wajah berhasil
                         </div>
-                        {{-- <div id="verification-error" class="bg-danger p-2 rounded text-white text-center" style="display: none;">
-                            <i class="fas fa-exclamation-triangle"></i> <span id="error-message">Verifikasi wajah gagal</span>
-                        </div> --}}
                     </div>
                 </div>
 
-                <!-- Bottom info container -->
                 <div class="overlay-bottom-info">
-                    <!-- Location info -->
                     <div class="info-box location-info">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
@@ -69,7 +62,6 @@
                         <div id="location-name" class="font-12 text-white">-</div>
                     </div>
 
-                    <!-- Time info -->
                     <div class="info-box time-info">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
@@ -83,7 +75,6 @@
             </div>
         </div>
 
-        <!-- Hidden form -->
         <form id="attendance-form" method="POST" 
             action="{{ request()->route()->getName() == 'attendance.clockin' ? route('clockin.store') : route('clockout.store') }}">
             @csrf
@@ -96,7 +87,6 @@
             </button>
         </form>
 
-        <!-- Warning message if no face descriptor -->
         @if (!Auth::user()->profile || !isset(Auth::user()->profile['face_descriptor']))
             <div class="faceid-warning bg-warning p-3 rounded-sm">
                 <h4 class="font-16">Perhatian!</h4>
@@ -111,13 +101,11 @@
 
 @push('css')
     <style>
-        /* Reset body and html to allow fullscreen */
         html, body {
             height: 100%;
             overflow: hidden;
         }
 
-        /* Content container modifications */
         .content.p-0 {
             padding: 0 !important;
             margin: 0 !important;
@@ -126,7 +114,6 @@
             position: relative;
         }
 
-        /* Camera fullscreen styling */
         .camera-fullscreen {
             position: fixed;
             top: 0;
@@ -151,19 +138,16 @@
 
         @media (max-width: 768px) {
             #video-element {
-                /* Alternatif pengaturan object-fit untuk mencoba mengurangi zoom */
                 object-fit: contain;
-                background-color: #000; /* Tambahkan latar belakang hitam untuk bagian yang kosong */
+                background-color: #000;
             }
         }
 
-        /* Alternatif styling untuk situasi ekstrim */
         .reduce-zoom #video-element {
-            transform: scale(0.8); /* Coba memperkecil skala video */
+            transform: scale(0.8);
             transform-origin: center center;
         }
 
-        /* Face overlay canvas */
         #face-overlay {
             position: absolute;
             top: 0;
@@ -173,7 +157,6 @@
             z-index: 10;
         }
 
-        /* Camera overlay container */
         .camera-overlay {
             position: absolute;
             top: 0;
@@ -194,14 +177,12 @@
                         rgba(0,0,0,0.5) 100%);
         }
 
-        /* Overlay header */
         .overlay-header {
             text-align: center;
             margin-top: 10px;
             margin-bottom: 20px;
         }
 
-        /* Overlay status section */
         .overlay-status {
             flex: 1;
             display: flex;
@@ -211,12 +192,10 @@
             position: relative;
         }
 
-        /* Bottom info container */
         .overlay-bottom-info {
             margin-bottom: 20px;
         }
 
-        /* Individual info boxes */
         .info-box {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
@@ -224,7 +203,6 @@
             margin-bottom: 8px;
         }
 
-        /* Face ID warning */
         .faceid-warning {
             position: absolute;
             top: 50%;
@@ -236,23 +214,19 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Text styling */
         .text-white {
             color: white !important;
         }
 
-        /* Face detection status styling */
         .face-detection-status {
             text-align: center;
         }
 
-        /* Verification result styling */
         #verification-result {
             width: 90%;
             max-width: 320px;
         }
 
-        /* Back button styling */
         .header-back {
             position: absolute;
             top: 10px;
@@ -270,7 +244,6 @@
             text-decoration: none;
         }
 
-        /* Face animation guide */
         .face-animation-container {
             position: absolute;
             top: 50%;
@@ -322,7 +295,6 @@
             font-size: 20px;
         }
 
-        /* Arrow animations */
         .arrow-left {
             animation: moveLeftRight 2s infinite;
             margin-right: 10px;
@@ -352,7 +324,6 @@
             50% { transform: translateY(-10px); opacity: 1; }
         }
 
-        /* Face outline animation */
         .face-shape {
             animation: pulseOutline 2s infinite;
         }
