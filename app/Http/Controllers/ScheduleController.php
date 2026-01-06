@@ -15,7 +15,6 @@ class ScheduleController extends Controller
     public function index()
     {
         $today = Carbon::today();
-        $tomorrow = Carbon::tomorrow();
 
         $tasksToday = TaskPlanner::whereDate('date', $today)->get();
 
@@ -33,14 +32,11 @@ class ScheduleController extends Controller
 
         $tasksPending = $tasksToday->whereNotIn('id', $taskProgressTaskIds);
 
-        $tasksTomorrow = TaskPlanner::whereDate('date', $tomorrow)->get();
-
         return view('tasks.index', compact(
             'tasksPending',
             'taskProgressInProgress',
             'taskProgressInEnd',
-            'taskProgressCompleted',
-            'tasksTomorrow'
+            'taskProgressCompleted'
         ));
     }
 
