@@ -105,6 +105,56 @@ class ScheduleController extends Controller
             ->with('success', 'Task recorded successfully.');
     }
 
+    public function updateProgressImage(Request $request)
+    {
+        $user = Auth::user();
+
+        $taskProgress = TaskProgress::where('task_planner_id', $request->task_planner_id)
+            ->where('user_id', $user->id)
+            ->where('status', 'in_progress')
+            ->latest()
+            ->first();
+
+        if (!$taskProgress) {
+            return redirect()->back()->with('error', 'Progress tidak ditemukan');
+        }
+
+        $imgUrl = $taskProgress->image_progress_url;
+        $imgPath = $taskProgress->image_progress_path;
+
+        if ($request->filled('image_base64')) {
+
+            if ($imgPath) {
+                Storage::disk(
+                    str_contains($imgPath, 's3') ? 's3' : 'public'
+                )->delete($imgPath);
+            }
+
+            $base64 = preg_replace('#^data:image/\w+;base64,#i', '', $request->image_base64);
+            $imageData = base64_decode($base64);
+            $fileName = 'progress_update_' . time() . '.jpg';
+
+            $storageOption = $request->input('storage_option', 'local');
+
+            if ($storageOption === 's3') {
+                Storage::disk('s3')->put("progress/{$fileName}", $imageData);
+                $imgPath = "progress/{$fileName}";
+                $imgUrl = Storage::disk('s3')->url($imgPath);
+            } else {
+                Storage::disk('public')->put("progress/{$fileName}", $imageData);
+                $imgPath = "progress/{$fileName}";
+                $imgUrl = asset("storage/{$imgPath}");
+            }
+        }
+
+        $taskProgress->image_progress_url = $imgUrl;
+        $taskProgress->image_progress_path = $imgPath;
+        $taskProgress->progress_description = $request->description;
+        $taskProgress->save();
+
+        return redirect()->back()->with('success', 'Progress berhasil diperbarui');
+    }
+
     public function progressEnd(Request $request)
     {
         $user = Auth::user();
