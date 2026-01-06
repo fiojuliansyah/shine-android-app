@@ -10,7 +10,7 @@
     @elseif ($taskProgress->status === 'in_progress' && !request()->has('end'))
         @include('tasks.partials.progress')
 
-    @elseif ($taskProgress->status === 'in_progress' && request()->has('end'))
+    @elseif ($taskProgress->status === 'end' && request()->has('end'))
         @include('tasks.partials.progress-end')
 
     @elseif ($taskProgress->status === 'completed')
