@@ -48,19 +48,6 @@
         </button>
     </form>
 
-    <form method="POST" action="{{ route('progress.end') }}" class="mt-3">
-        @csrf
-        <input type="hidden" name="task_planner_id" value="{{ $task->id }}">
-        <input type="hidden" name="image_base64" id="imageBase64End">
-        <input type="hidden" name="description" id="descEnd">
-
-        <button type="submit" id="btnEnd"
-            class="btn btn-full btn-action bg-green-dark"
-            disabled>
-            Selesaikan Pekerjaan
-        </button>
-    </form>
-
 </div>
 @endsection
 

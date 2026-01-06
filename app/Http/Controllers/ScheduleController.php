@@ -149,6 +149,7 @@ class ScheduleController extends Controller
 
         $taskProgress->image_progress_url = $imgUrl;
         $taskProgress->image_progress_path = $imgPath;
+        $taskProgress->status = 'end';
         $taskProgress->progress_description = $request->description;
         $taskProgress->save();
 
