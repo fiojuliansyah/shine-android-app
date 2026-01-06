@@ -9,7 +9,7 @@
         @elseif ($taskProgress->status === 'in_progress')
             @include('tasks.partials.progress')
         @else
-            @include('tasks.partials.end')
+            @include('tasks.partials.completed')
         @endif
     </div>
 @endsection

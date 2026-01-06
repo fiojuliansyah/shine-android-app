@@ -2,13 +2,19 @@
     <h4 class="color-green-dark mb-2">Tugas Selesai</h4>
 
     <div class="row mt-3">
-        <div class="col-6">
+        <div class="col-4">
             <p class="font-12 opacity-70 mb-1">Foto Awal</p>
             <img src="{{ $taskProgress->image_before_url }}"
                 class="img-fluid rounded shadow-sm">
         </div>
 
-        <div class="col-6">
+        <div class="col-4">
+            <p class="font-12 opacity-70 mb-1">Foto Progress</p>
+            <img src="{{ $taskProgress->image_progress_url }}"
+                class="img-fluid rounded shadow-sm">
+        </div>
+
+        <div class="col-4">
             <p class="font-12 opacity-70 mb-1">Foto Akhir</p>
             <img src="{{ $taskProgress->image_after_url }}"
                 class="img-fluid rounded shadow-sm">
