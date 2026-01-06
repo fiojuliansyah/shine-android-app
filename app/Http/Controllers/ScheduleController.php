@@ -14,38 +14,35 @@ class ScheduleController extends Controller
 {
     public function index()
     {
-        
-        $now = Carbon::now();
-        
-        
+        $today = Carbon::today();
         $tomorrow = Carbon::tomorrow();
-    
-        
-        $tasks = TaskPlanner::whereDate('date', $now->toDateString())->get();
-    
-        
-        $taskProgressInProgress = TaskProgress::whereDate('date', $now->toDateString())
-                                              ->where('status', 'in_progress')
-                                              ->get();
-        $taskProgressCompleted = TaskProgress::whereDate('date', $now->toDateString())
-                                            ->where('status', 'completed')
-                                            ->get();
-    
-        
-        $taskProgressInProgressIds = $taskProgressInProgress->pluck('task_planner_id')->toArray();
-        $taskProgressCompletedIds = $taskProgressCompleted->pluck('task_planner_id')->toArray();
-    
-        
-        $tasksPending = $tasks->filter(function($task) use ($taskProgressInProgressIds, $taskProgressCompletedIds) {
-            return !in_array($task->id, $taskProgressInProgressIds) && !in_array($task->id, $taskProgressCompletedIds);
-        });
-    
-        
-        $tasksTomorrow = TaskPlanner::whereDate('date', $tomorrow->toDateString())->get();
-    
-        
-        return view('tasks.index', compact('tasksPending', 'taskProgressInProgress', 'taskProgressCompleted', 'tasksTomorrow'));
-    }    
+
+        $tasksToday = TaskPlanner::whereDate('date', $today)->get();
+
+        $taskProgressToday = TaskProgress::with('taskPlanner')
+            ->whereDate('date', $today)
+            ->get();
+
+        $taskProgressGrouped = $taskProgressToday->groupBy('status');
+
+        $taskProgressInProgress = $taskProgressGrouped->get('in_progress', collect());
+        $taskProgressInEnd = $taskProgressGrouped->get('end', collect());
+        $taskProgressCompleted = $taskProgressGrouped->get('completed', collect());
+
+        $taskProgressTaskIds = $taskProgressToday->pluck('task_planner_id')->unique();
+
+        $tasksPending = $tasksToday->whereNotIn('id', $taskProgressTaskIds);
+
+        $tasksTomorrow = TaskPlanner::whereDate('date', $tomorrow)->get();
+
+        return view('tasks.index', compact(
+            'tasksPending',
+            'taskProgressInProgress',
+            'taskProgressInEnd',
+            'taskProgressCompleted',
+            'tasksTomorrow'
+        ));
+    }
 
     public function show($id)
     {
