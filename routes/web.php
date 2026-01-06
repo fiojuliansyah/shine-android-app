@@ -37,7 +37,7 @@ Route::middleware('auth')->prefix('mobile')->group(function () {
     Route::get('/schedule/{id}/show', [ScheduleController::class, 'show'])->name('schedule.show');
     Route::post('/schedule/progress/start', [ScheduleController::class, 'progressStart'])->name('progress.start');
     Route::post('/schedule/progress/end', [ScheduleController::class, 'progressEnd'])->name('progress.end');
-    Route::post('/schedule/progress/update-image', [TaskController::class, 'updateProgressImage'])->name('progress.image');
+    Route::post('/schedule/progress/update-image', [ScheduleController::class, 'updateProgressImage'])->name('progress.image');
 
     Route::get('/face-register', [ProfileController::class, 'faceRegister'])->name('face.register');
     Route::post('/face/process', [FaceRecognitionController::class, 'processFace'])->name('face.process');
