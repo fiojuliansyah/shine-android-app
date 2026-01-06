@@ -7,8 +7,9 @@
     <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
         <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#pending">Pending</a>
         <a href="#" data-bs-toggle="collapse" data-bs-target="#in_progress">Berlangsung</a>
-        <a href="#" data-bs-toggle="collapse" data-bs-target="#end">Akan Diselesaikan</a>
+        <a href="#" data-bs-toggle="collapse" data-bs-target="#end">Selesaikan</a>
         <a href="#" data-bs-toggle="collapse" data-bs-target="#completed">Selesai</a>
+        <a href="#" data-bs-toggle="collapse" data-bs-target="#tomorrow">Besok</a>
     </div>
 
     <div class="clearfix mb-3"></div>
@@ -76,6 +77,23 @@
                     </a>
                 @empty
                     <div class="text-center opacity-60 font-13">Belum ada tugas selesai</div>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
+    <div data-bs-parent="#tab-group-1" class="collapse" id="tomorrow">
+        <div class="content mb-0">
+            <h4>Besok</h4>
+            <div class="list-group list-custom-large me-2">
+                @forelse ($tasksTomorrow as $task)
+                    <a href="#">
+                        <span>{{ $task->name }}</span>
+                        <strong>{{ $task->work_type }} - Mulai {{ \Carbon\Carbon::parse($task->start_time)->format('H:i') }}</strong>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                @empty
+                    <div class="text-center opacity-60 font-13">Tidak ada jadwal besok</div>
                 @endforelse
             </div>
         </div>
