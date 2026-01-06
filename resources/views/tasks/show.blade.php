@@ -5,11 +5,11 @@
 @section('content')
     <div class="content">
         @if (!$taskProgress)
-            @include('tasks.partials.progress-start')
+            @include('tasks.partials.start')
         @elseif ($taskProgress->status === 'in_progress')
-            @include('tasks.partials.progress-image')
+            @include('tasks.partials.progress')
         @else
-            @include('tasks.partials.progress-end')
+            @include('tasks.partials.end')
         @endif
     </div>
 @endsection
