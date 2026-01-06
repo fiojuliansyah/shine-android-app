@@ -31,15 +31,7 @@
                 </button>
             </div>
         </div>
-
-        <div class="mt-3">
-            <textarea name="description"
-                class="form-control rounded-m"
-                rows="4"
-                placeholder="Update progres pekerjaan..."
-                required></textarea>
-        </div>
-
+        
         <div class="mt-3">
             <button type="submit" id="btnSubmit"
                 class="btn btn-full btn-action bg-yellow-dark"

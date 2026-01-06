@@ -160,7 +160,7 @@ class ScheduleController extends Controller
 
         $taskProgress = TaskProgress::where('task_planner_id', $request->task_planner_id)
             ->where('user_id', $user->id)
-            ->where('status', 'in_progress')
+            ->where('status', 'end')
             ->latest()
             ->first();
 
