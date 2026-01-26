@@ -53,6 +53,7 @@ class PermitController extends Controller
             'date' => $request->start_date,
             'user_id' => $user->id,
             'site_id' => $user->site_id,
+            'type' => 'permit',
         ]);
 
         Permit::create([

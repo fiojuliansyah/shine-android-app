@@ -53,7 +53,7 @@ class MinuteController extends Controller
             $attendance->user_id = $user->id;
             $attendance->site_id = $user->site_id;
             $attendance->clock_in = $request->clock;
-            $attendance->type = 'minutes';
+            $attendance->type = 'minute';
             $attendance->face_image_url_clockin = $imgUrl;
             $attendance->remark = $request->remark;
             $attendance->save();
